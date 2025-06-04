@@ -38,8 +38,6 @@ public class SubmitOrderTest extends BaseTest{
 	@Test(dataProvider="getData",groups= {"Purchase"})
 	public void submitOrder(HashMap<String,String> input) throws IOException, InterruptedException
 	{
-
-		
 		ProductCatalogue productCatalogue = landingPage.loginApplication(input.get("email"), input.get("password"));
 		List<WebElement> products = productCatalogue.getProductList();
 		productCatalogue.addProductToCart(input.get("product"));
@@ -52,8 +50,6 @@ public class SubmitOrderTest extends BaseTest{
 		ConfirmationPage confirmationPage = checkoutPage.submitOrder();
 		String confirmMessage = confirmationPage.getConfirmationMessage();
 		Assert.assertTrue(confirmMessage.equalsIgnoreCase("THANKYOU FOR THE ORDER."));
-		
-
 	}
 	
 	@Test(dependsOnMethods= {"submitOrder"})
@@ -63,26 +59,16 @@ public class SubmitOrderTest extends BaseTest{
 		ProductCatalogue productCatalogue = landingPage.loginApplication("anshika@gmail.com", "Iamking@000");
 		OrderPage ordersPage = productCatalogue.goToOrdersPage();
 		Assert.assertTrue(ordersPage.VerifyOrderDisplay(productName));
-		
-}
-	
-
+	}
 	
 	//Extent Reports - 
-	
-	
+
 	@DataProvider
 	public Object[][] getData() throws IOException
 	{
-
-		
 		List<HashMap<String,String>> data = getJsonDataToMap(System.getProperty("user.dir")+"//src//test//java//rahulshettyacademy//data//PurchaseOrder.json");
 		return new Object[][]  {{data.get(0)}, {data.get(1) } };
-		
 	}
-	
-	
-	
 	
 //	 @DataProvider
 //	  public Object[][] getData()
@@ -99,15 +85,5 @@ public class SubmitOrderTest extends BaseTest{
 //	map1.put("email", "shetty@gmail.com");
 //	map1.put("password", "Iamking@000");
 //	map1.put("product", "ADIDAS ORIGINAL");
-	  
-	
-	
-	
-	
-	
-	
-	
-	
-
 
 }
