@@ -4,6 +4,9 @@ import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 import org.testng.AssertJUnit;
 
+import java.awt.AWTException;
+import java.awt.Robot;
+import java.awt.event.KeyEvent;
 import java.io.File;
 import java.io.IOException;
 import java.time.Duration;
@@ -53,12 +56,17 @@ public class SubmitOrderTest extends BaseTest{
 	}
 	
 	@Test(dependsOnMethods= {"submitOrder"})
-	public void OrderHistoryTest()
+	public void OrderHistoryTest() throws AWTException
 	{
 		//"ZARA COAT 3";
 		ProductCatalogue productCatalogue = landingPage.loginApplication("anshika@gmail.com", "Iamking@000");
 		OrderPage ordersPage = productCatalogue.goToOrdersPage();
 		Assert.assertTrue(ordersPage.VerifyOrderDisplay(productName));
+		
+		Robot robot = new Robot();
+		robot.keyPress(KeyEvent.VK_ENTER);
+		robot.keyRelease(KeyEvent.VK_ENTER);
+
 	}
 	
 	//Extent Reports - 

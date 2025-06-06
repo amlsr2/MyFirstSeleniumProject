@@ -1,1 +1,1 @@
-package rahulshettyacademy.Data;
+package rahulshettyacademy.data;
